@@ -106,19 +106,13 @@ function createDividerCard(divider, index) {
  * Handle copying a divider to the clipboard
  * @param {string} text - The text to copy
  */
-async function handleCopy(text) {
-    try {
-        // Modern clipboard API (preferred)
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(text);
-            showStatus('Copied to clipboard! ✓', 'success');
-        } else {
-            // Fallback for older browsers
-            copyTextFallback(text);
-        }
-    } catch (error) {
-        console.error('Copy failed:', error);
-        showStatus('Could not copy automatically. Please copy manually.', 'error');
+function handleCopy(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+            .then(() => showStatus('Copied to clipboard! ✓', 'success'))
+            .catch(() => copyTextFallback(text));
+    } else {
+        copyTextFallback(text);
     }
 }
 
