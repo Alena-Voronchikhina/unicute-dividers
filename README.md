@@ -1,10 +1,14 @@
 # UniCute Dividers
 
-Copy decorative Unicode and ASCII dividers to your clipboard. No build tools, no dependencies, just vanilla HTML/CSS/JS.
+Copy decorative Unicode and ASCII dividers to your clipboard.
+
+**[👉 Try it live](https://alena-voronchikhina.github.io/unicute-dividers/)**
+
+No build tools, no dependencies, just vanilla HTML/CSS/JS.
 
 ## What it does
 
-Pick a divider from the grid, click it, and it copies to your clipboard. That's it. 20 hand-picked dividers with a celestial background theme and a dark interface that doesn't look terrible.
+Pick a divider from the grid, click it, and it copies to your clipboard. 20 hand-picked dividers with a celestial background theme and a dark interface.
 
 ## Tech
 
@@ -16,9 +20,7 @@ Pick a divider from the grid, click it, and it copies to your clipboard. That's 
 
 ## Getting Started
 
-Clone or download this repository and open `index.html` in your browser.
-
-That's it. No build process, no dependencies.
+Or run locally: clone this repo and open `index.html` in your browser.
 
 ## GitHub Pages
 
