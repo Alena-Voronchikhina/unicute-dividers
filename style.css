@@ -1,0 +1,296 @@
+/**
+ * UniCute Dividers - Stylesheet
+ * Clean, minimal design with responsive layout
+ */
+
+/* ============================================================================
+   RESET & BASE STYLES
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", 
+                 Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #f8d7e8;
+    background-color: #1a0a1f3a;
+    background-image: 
+        linear-gradient(135deg, rgba(26, 10, 31, 0.46) 0%, rgba(45, 27, 46, 0.46) 80%),
+        url('celestial-bg.png');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: linear-gradient(to bottom, rgba(60, 0, 71, 0.659), transparent);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================================
+   HEADER
+   ============================================================================ */
+
+header {
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #ff9ed5;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3),
+                 0 4px 16px rgba(255, 0, 102, 0.4);
+    letter-spacing: 0.5px;
+}
+
+header .subtitle {
+    font-size: 1.1rem;
+    color: #e0a0c7;
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25),
+                 0 2px 8px rgba(255, 77, 148, 0.3);
+    margin: 0.3rem 0;
+}
+
+/* ============================================================================
+   MAIN CONTENT
+   ============================================================================ */
+
+main {
+    flex: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    padding-bottom: 6rem;
+    padding-top: 0rem;
+}
+
+/* ============================================================================
+   STATUS MESSAGE
+   ============================================================================ */
+
+.status {
+    text-align: center;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.status.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.status.success {
+    background-color: #2d1a3d;
+    color: #ffb3e6;
+    border: 1px solid #5a3a5f;
+}
+
+.status.error {
+    background-color: #3d1a2a;
+    color: #ffb3cc;
+    border: 1px solid #6b3a4a;
+}
+
+/* ============================================================================
+   DIVIDERS CONTAINER
+   ============================================================================ */
+
+.dividers-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+/* ============================================================================
+   DIVIDER CARDS
+   ============================================================================ */
+
+.divider-card {
+    background-color: #2a1a2e;
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    border: 3px solid #3d2a42;
+    position: relative;
+    overflow: hidden;
+    color: #f8d7e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+    white-space: nowrap;
+}
+
+/* Hide scrollbar for Chrome/Safari */
+.divider-card::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hover effect */
+.divider-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(255, 158, 213, 0.3);
+    border-color: #ff9ed5;
+    background-color: #3a2542;
+}
+
+/* Active (click) effect */
+.divider-card:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Focus effect for keyboard navigation */
+.divider-card:focus {
+    outline: none;
+    border-color: #ff9ed5;
+    box-shadow: 0 0 0 3px rgba(255, 158, 213, 0.4);
+}
+
+/* Subtle animation on card creation */
+.divider-card::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 158, 213, 0.15);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.divider-card:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: #c89dd1;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #ff9ed5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #ffb3e6;
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+/* Tablets and larger */
+@media (min-width: 600px) {
+    .dividers-container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+/* Desktop */
+@media (min-width: 900px) {
+    header h1 {
+        font-size: 3rem;
+    }
+    
+    header .subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 400px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header .subtitle {
+        font-size: 1rem;
+    }
+    
+    .divider-card {
+        padding: 1.25rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .divider-card {
+        border: 2px solid #000;
+    }
+    
+    .divider-card:hover {
+        border-color: #000;
+        background-color: #f0f0f0;
+    }
+}
