@@ -1,7 +1,18 @@
 /**
- * UniCute Dividers - Clipboard utility for Unicode dividers
+ * UniCute Dividers - A simple clipboard utility for Unicode dividers
+ * Author: CS Portfolio Project
+ * Date: November 2025
  */
 
+// ============================================================================
+// DATA
+// ============================================================================
+
+/**
+ * Collection of Unicode and ASCII dividers
+ * Each string represents a decorative text divider
+ * Sorted by length (shortest to longest)
+ */
 const DIVIDERS = [
     "꧁ ༺─────༺ ☆ ༻─────༻ ꧂",
     "⋆ ˚｡ ˗ˏˋ ★ ˎˊ˗ ˚⋆｡˚ ⋆ ˗ˏˋ ★ ˎˊ˗ ⋆ ˚｡⋆˚ ˗ˏˋ ★ ˎˊ˗ ｡˚ ⋆",
@@ -25,24 +36,50 @@ const DIVIDERS = [
     "~•♡•~ ~•♡•~ ~•♡•~ ~•♡•~ ~•♡•~"
 ];
 
+// ============================================================================
+// DOM ELEMENTS
+// ============================================================================
+
 let statusElement;
 let dividersContainer;
 let statusTimeout = null;
 
+// ============================================================================
+// CORE FUNCTIONS
+// ============================================================================
+
+/**
+ * Initialize the application when DOM is ready
+ */
 function init() {
+    // Get references to DOM elements
     statusElement = document.getElementById('status');
     dividersContainer = document.getElementById('dividers-container');
+    
+    // Render all dividers
     renderDividers();
 }
 
+/**
+ * Dynamically render all dividers as clickable cards
+ */
 function renderDividers() {
+    // Clear any existing content
     dividersContainer.innerHTML = '';
+    
+    // Create a card for each divider
     DIVIDERS.forEach((divider, index) => {
         const card = createDividerCard(divider, index);
         dividersContainer.appendChild(card);
     });
 }
 
+/**
+ * Create a single divider card element
+ * @param {string} divider - The divider text
+ * @param {number} index - The index of this divider
+ * @returns {HTMLElement} The created card element
+ */
 function createDividerCard(divider, index) {
     const card = document.createElement('div');
     card.className = 'divider-card';
@@ -51,7 +88,10 @@ function createDividerCard(divider, index) {
     card.setAttribute('tabindex', '0');
     card.setAttribute('aria-label', `Copy divider: ${divider}`);
     
+    // Add click handler
     card.addEventListener('click', () => handleCopy(divider));
+    
+    // Add keyboard support (Enter or Space)
     card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -62,17 +102,32 @@ function createDividerCard(divider, index) {
     return card;
 }
 
-function handleCopy(text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text)
-            .then(() => showStatus('Copied to clipboard! ✓', 'success'))
-            .catch(() => copyTextFallback(text));
-    } else {
-        copyTextFallback(text);
+/**
+ * Handle copying a divider to the clipboard
+ * @param {string} text - The text to copy
+ */
+async function handleCopy(text) {
+    try {
+        // Modern clipboard API (preferred)
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(text);
+            showStatus('Copied to clipboard! ✓', 'success');
+        } else {
+            // Fallback for older browsers
+            copyTextFallback(text);
+        }
+    } catch (error) {
+        console.error('Copy failed:', error);
+        showStatus('Could not copy automatically. Please copy manually.', 'error');
     }
 }
 
+/**
+ * Fallback method for copying text in older browsers
+ * @param {string} text - The text to copy
+ */
 function copyTextFallback(text) {
+    // Create a temporary textarea element
     const textarea = document.createElement('textarea');
     textarea.value = text;
     textarea.style.position = 'fixed';
@@ -82,38 +137,56 @@ function copyTextFallback(text) {
     document.body.appendChild(textarea);
     
     try {
+        // Select and copy the text
         textarea.select();
         textarea.setSelectionRange(0, text.length);
         
         const successful = document.execCommand('copy');
+        
         if (successful) {
             showStatus('Copied to clipboard! ✓', 'success');
         } else {
             showStatus('Could not copy automatically. Please copy manually.', 'error');
         }
     } catch (error) {
+        console.error('Fallback copy failed:', error);
         showStatus('Could not copy automatically. Please copy manually.', 'error');
     } finally {
+        // Clean up
         document.body.removeChild(textarea);
     }
 }
 
+/**
+ * Display a status message to the user
+ * @param {string} message - The message to display
+ * @param {string} type - The type of message ('success' or 'error')
+ */
 function showStatus(message, type = 'success') {
+    // Clear any existing timeout
     if (statusTimeout) {
         clearTimeout(statusTimeout);
     }
     
+    // Update status element
     statusElement.textContent = message;
     statusElement.className = `status ${type} visible`;
     
+    // Hide after 2 seconds
     statusTimeout = setTimeout(() => {
         statusElement.className = 'status';
         statusElement.textContent = '';
     }, 2000);
 }
 
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
+
+// Wait for DOM to be ready, then initialize
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
+    // DOM is already ready
     init();
 }
