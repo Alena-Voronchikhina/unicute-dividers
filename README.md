@@ -14,23 +14,15 @@ Pick a divider from the grid, click it, and it copies to your clipboard. That's 
 - Full keyboard navigation support
 - ~5KB total (before images)
 
-## Local
+## Getting Started
 
-Just open `index.html` in a browser, or run a local server:
+Clone or download this repository and open `index.html` in your browser.
 
-```bash
-# Python 3
-python3 -m http.server 8000
+That's it. No build process, no dependencies.
 
-# Or Node.js
-npx serve
-```
+## GitHub Pages
 
-Then go to `http://localhost:8000`.
-
-## Deploy to GitHub Pages
-
-1. Create a repo and push:
+1. Push to GitHub:
 ```bash
 git init
 git add .
@@ -40,6 +32,13 @@ git remote add origin https://github.com/yourusername/unicute-dividers.git
 git push -u origin main
 ```
 
-2. Go to Settings → Pages and select `main` branch as the source.
+2. Enable Pages: Settings → Pages → select `main` branch.
 
-3. Your site will be live at `https://yourusername.github.io/unicute-dividers/` in a minute or two.
+3. Live at `https://yourusername.github.io/unicute-dividers/`
+
+## Browser Support
+
+- Chrome/Edge 63+
+- Firefox 53+
+- Safari 13.1+
+- Modern browsers with Clipboard API support, fallback for older versions
