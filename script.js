@@ -90,19 +90,14 @@ function createDividerCard(divider, index) {
 }
 
 // Copy divider to clipboard with fallback for older browsers
-async function handleCopy(text) {
-    try {
-        // Modern clipboard API (preferred)
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(text);
-            showStatus('Copied to clipboard! ✓', 'success');
-        } else {
-            // Fallback for older browsers
-            copyTextFallback(text);
-        }
-    } catch (error) {
-        console.error('Copy failed:', error);
-        showStatus('Could not copy automatically. Please copy manually.', 'error');
+function handleCopy(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+            .then(() => showStatus('Copied to clipboard! ✓', 'success'))
+            .catch(() => copyTextFallback(text));
+    } else {
+        // Fallback for older browsers
+        copyTextFallback(text);
     }
 }
 
