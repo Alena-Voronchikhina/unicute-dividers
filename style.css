@@ -145,10 +145,10 @@ main {
 
 .divider-card {
     background-color: #2a1a2e;
-    padding: 1.5rem 2rem;
+    padding: 0.75rem 1rem;
     border-radius: 10px;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 0.85rem;
     cursor: pointer;
     user-select: none;
     transition: all 0.2s ease;
@@ -160,7 +160,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 80px;
+    min-height: 55px;
     white-space: nowrap;
 }
 
@@ -265,8 +265,8 @@ footer a:hover {
     }
     
     .divider-card {
-        padding: 1.25rem 1rem;
-        font-size: 0.9rem;
+        padding: 0.7rem 0.8rem;
+        font-size: 0.75rem;
     }
 }
 
