@@ -1,18 +1,12 @@
 /**
- * UniCute Dividers - A simple clipboard utility for Unicode dividers
- * Author: CS Portfolio Project
- * Date: November 2025
+ * UniCute Dividers - Clipboard utility for Unicode dividers
  */
 
 // ============================================================================
 // DATA
 // ============================================================================
 
-/**
- * Collection of Unicode and ASCII dividers
- * Each string represents a decorative text divider
- * Sorted by length (shortest to longest)
- */
+// Decorative text dividers (Unicode + ASCII)
 const DIVIDERS = [
     "꧁ ༺─────༺ ☆ ༻─────༻ ꧂",
     "⋆ ˚｡ ˗ˏˋ ★ ˎˊ˗ ˚⋆｡˚ ⋆ ˗ˏˋ ★ ˎˊ˗ ⋆ ˚｡⋆˚ ˗ˏˋ ★ ˎˊ˗ ｡˚ ⋆",
@@ -60,9 +54,7 @@ function init() {
     renderDividers();
 }
 
-/**
- * Dynamically render all dividers as clickable cards
- */
+// Render all divider cards
 function renderDividers() {
     // Clear any existing content
     dividersContainer.innerHTML = '';
@@ -74,12 +66,7 @@ function renderDividers() {
     });
 }
 
-/**
- * Create a single divider card element
- * @param {string} divider - The divider text
- * @param {number} index - The index of this divider
- * @returns {HTMLElement} The created card element
- */
+// Create a single divider card element
 function createDividerCard(divider, index) {
     const card = document.createElement('div');
     card.className = 'divider-card';
@@ -102,8 +89,8 @@ function createDividerCard(divider, index) {
     return card;
 }
 
-/**
- * Handle copying a divider to the clipboard
+// Copy divider to clipboard with fallback for older browsers
+function handleCopy(text) {
  * @param {string} text - The text to copy
  */
 async function handleCopy(text) {
@@ -122,10 +109,7 @@ async function handleCopy(text) {
     }
 }
 
-/**
- * Fallback method for copying text in older browsers
- * @param {string} text - The text to copy
- */
+// Fallback copy using document.execCommand for older browsers
 function copyTextFallback(text) {
     // Create a temporary textarea element
     const textarea = document.createElement('textarea');
@@ -157,10 +141,8 @@ function copyTextFallback(text) {
     }
 }
 
-/**
- * Display a status message to the user
- * @param {string} message - The message to display
- * @param {string} type - The type of message ('success' or 'error')
+// Show status message for 2 seconds with fade animation
+function showStatus(message, type) {
  */
 function showStatus(message, type = 'success') {
     // Clear any existing timeout
