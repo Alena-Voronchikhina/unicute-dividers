@@ -143,7 +143,6 @@ function copyTextFallback(text) {
             showStatus('Could not copy automatically. Please copy manually.', 'error');
         }
     } catch (error) {
-        console.error('Fallback copy failed:', error);
         showStatus('Could not copy automatically. Please copy manually.', 'error');
     } finally {
         // Clean up
