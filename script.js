@@ -90,9 +90,6 @@ function createDividerCard(divider, index) {
 }
 
 // Copy divider to clipboard with fallback for older browsers
-function handleCopy(text) {
- * @param {string} text - The text to copy
- */
 async function handleCopy(text) {
     try {
         // Modern clipboard API (preferred)
@@ -142,8 +139,6 @@ function copyTextFallback(text) {
 }
 
 // Show status message for 2 seconds with fade animation
-function showStatus(message, type) {
- */
 function showStatus(message, type = 'success') {
     // Clear any existing timeout
     if (statusTimeout) {
