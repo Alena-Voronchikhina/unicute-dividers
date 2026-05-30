@@ -46,9 +46,12 @@ let statusTimeout = null;
  * Initialize the application when DOM is ready
  */
 function init() {
+    console.log('init() called');
     // Get references to DOM elements
     statusElement = document.getElementById('status');
     dividersContainer = document.getElementById('dividers-container');
+    console.log('statusElement:', statusElement);
+    console.log('dividersContainer:', dividersContainer);
     
     // Render all dividers
     renderDividers();
@@ -56,14 +59,18 @@ function init() {
 
 // Render all divider cards
 function renderDividers() {
+    console.log('renderDividers() called');
+    console.log('DIVIDERS array length:', DIVIDERS.length);
     // Clear any existing content
     dividersContainer.innerHTML = '';
     
     // Create a card for each divider
     DIVIDERS.forEach((divider, index) => {
+        console.log('Creating card', index, ':', divider);
         const card = createDividerCard(divider, index);
         dividersContainer.appendChild(card);
     });
+    console.log('renderDividers() complete');
 }
 
 // Create a single divider card element
@@ -156,9 +163,12 @@ function showStatus(message, type = 'success') {
 // ============================================================================
 
 // Wait for DOM to be ready, then initialize
+console.log('script.js loaded, document.readyState:', document.readyState);
 if (document.readyState === 'loading') {
+    console.log('DOM still loading, adding DOMContentLoaded listener');
     document.addEventListener('DOMContentLoaded', init);
 } else {
     // DOM is already ready
+    console.log('DOM already ready, calling init() immediately');
     init();
 }
